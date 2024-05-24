@@ -4,31 +4,31 @@ services:
   web:
     build: .
     image: php:7.2.32-apache
-    container_name: adoms-head
+    container_name: adoms-head #nombre del contenedor
     volumes:
       - ./src:/var/www/html
     ports:
       - "8080:80"
     networks:
-      - adoms-head-network
+      - adoms-head-network #nombre de la red
 
   db:
     image: mysql:5.7
-    container_name: adoms-head-db
+    container_name: adoms-head-db #nombre contenedor DB
     environment:
       MYSQL_ROOT_PASSWORD: adoms
-      MYSQL_DATABASE: headdev
+      MYSQL_DATABASE: headdev  #nombre base de datos
       MYSQL_USER: root
       MYSQL_PASSWORD: adoms
     volumes:
       - db-data:/var/lib/mysql
-      - ./head.sql:/docker-entrypoint-initdb.d/head.sql
+      - ./head.sql:/docker-entrypoint-initdb.d/head.sql #setear dump DB
     ports:
       - "3306:3306"
     networks:
-      - adoms-head-network
+      - adoms-head-network #nombre de la red del DB
 
-  phpmyadmin: 
+  phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: adoms-phpmyadmin
     environment:
@@ -37,10 +37,10 @@ services:
     ports:
       - "8081:80"
     networks:
-      - adoms-head-network
+      - adoms-head-network #nombre de la red de phpmyadmin
 
 networks:
-  adoms-head-network:
+  adoms-head-network: #nombre de la red
     driver: bridge
 
 volumes:
