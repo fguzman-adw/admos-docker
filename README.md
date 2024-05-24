@@ -1,4 +1,4 @@
-# adoms-docker
+# Instanciamiento de AdOMS en Docker
 DockerFile contiene la configuración necesaria para levantar el
 ambiente, además copia todos los archivos hacia el contenedor y 
 ajusta los permisos.
