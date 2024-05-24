@@ -1,32 +1,34 @@
+#¡¡¡ IMPORTANTE !!!
+#Donde este comentado reemplazar los valores por el ambiente que corresponda.
 version: '3.7'
 
 services:
   web:
     build: .
     image: php:7.2.32-apache
-    container_name: adoms-head #nombre del contenedor
+    container_name: adoms-nombre #nombre del contenedor
     volumes:
       - ./src:/var/www/html
     ports:
       - "8080:80"
     networks:
-      - adoms-head-network #nombre de la red
+      - adoms-nombre-network #nombre de la red
 
   db:
     image: mysql:5.7
-    container_name: adoms-head-db #nombre contenedor DB
+    container_name: adoms-nombre-db #nombre contenedor DB
     environment:
       MYSQL_ROOT_PASSWORD: adoms
-      MYSQL_DATABASE: headdev  #nombre base de datos
+      MYSQL_DATABASE: basededatos  #nombre base de datos
       MYSQL_USER: root
       MYSQL_PASSWORD: adoms
     volumes:
       - db-data:/var/lib/mysql
-      - ./head.sql:/docker-entrypoint-initdb.d/head.sql #setear dump DB
+      - ./dump_adoms.sql:/docker-entrypoint-initdb.d/dump_adoms.sql #setear dump DB
     ports:
       - "3306:3306"
     networks:
-      - adoms-head-network #nombre de la red del DB
+      - adoms-nombre-network #nombre de la red del DB
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -37,10 +39,10 @@ services:
     ports:
       - "8081:80"
     networks:
-      - adoms-head-network #nombre de la red de phpmyadmin
+      - adoms-nombre-network #nombre de la red de phpmyadmin
 
 networks:
-  adoms-head-network: #nombre de la red
+  adoms-nombre-network: #nombre de la red
     driver: bridge
 
 volumes:
